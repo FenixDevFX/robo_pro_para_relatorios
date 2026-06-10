@@ -1,0 +1,23 @@
+name: Execução diária do Robô
+
+on:
+  schedule:
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+
+jobs:
+  executar:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name : clonar repositorio
+      uses : action/checkout@v3
+
+    - name: Commit do relatorio
+      run:
+        git conf user.name "github-action"
+        git add dados/relatorio.csv
+        git comit -m "Atualização diária"
+        git push
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
