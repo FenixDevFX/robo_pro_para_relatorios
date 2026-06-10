@@ -31,6 +31,7 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@://github.com"
         git add dados/relatorio.csv
-        git commit -m "Atualização diária"
-        git push
+        git commit -m "Atualização diária" || echo "Sem alterações para salvar"
+        git pull --rebase origin main
+        git push origin main
 
